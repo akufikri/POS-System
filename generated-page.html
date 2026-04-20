@@ -1,0 +1,490 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volare POS - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+            color: #010101;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e5e5e5;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c9a96e;
+        }
+    </style>
+</head>
+<body class="antialiased h-screen flex overflow-hidden selection:bg-[#f5e3bd] selection:text-[#010101]">
+
+    <!-- Sidebar -->
+    <aside class="w-64 flex-shrink-0 bg-[#ffffff] border-r border-[#e5e5e5] flex flex-col justify-between hidden md:flex z-10 relative">
+        <div>
+            <!-- Logo -->
+            <div class="h-20 flex items-center px-8 border-b border-[#e5e5e5]/50">
+                <span class="text-xl font-semibold tracking-tighter uppercase text-[#010101]">Volare</span>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="p-4 space-y-1.5 mt-2">
+                <!-- Active Item -->
+                <a href="#" class="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#f5e3bd]/40 text-[#010101] font-medium transition-colors">
+                    <iconify-icon icon="solar:pie-chart-2-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                    <span class="text-sm">Dashboard</span>
+                </a>
+                
+                <!-- Inactive Items -->
+                <a href="#products" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-[#6b7280] hover:text-[#010101] hover:bg-[#f5f5f5] transition-colors">
+                    <iconify-icon icon="solar:box-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                    <span class="text-sm font-medium">Products</span>
+                </a>
+
+                <a href="#orders" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-[#6b7280] hover:text-[#010101] hover:bg-[#f5f5f5] transition-colors">
+                    <iconify-icon icon="solar:bill-list-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                    <span class="text-sm font-medium">Orders</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-[#6b7280] hover:text-[#010101] hover:bg-[#f5f5f5] transition-colors">
+                    <iconify-icon icon="solar:users-group-rounded-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                    <span class="text-sm font-medium">Users</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Bottom Actions -->
+        <div class="p-4 border-t border-[#e5e5e5]/50">
+            <a href="#" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-[#6b7280] hover:text-[#010101] hover:bg-[#f5f5f5] transition-colors">
+                <iconify-icon icon="solar:settings-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                <span class="text-sm font-medium">Settings</span>
+            </a>
+            <div class="mt-4 flex items-center gap-3 px-4 py-2">
+                <div class="w-8 h-8 rounded-full bg-[#f5e3bd] flex items-center justify-center text-[#c9a96e] font-medium text-xs">
+                    AW
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-sm font-medium text-[#010101]">Admin User</span>
+                    <span class="text-xs text-[#6b7280]">Store Owner</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col overflow-y-auto bg-[#f5f5f5] relative">
+        
+        <!-- Mobile Header -->
+        <header class="md:hidden h-16 bg-[#ffffff] border-b border-[#e5e5e5] flex items-center justify-between px-6 sticky top-0 z-20">
+            <span class="text-lg font-semibold tracking-tighter uppercase text-[#010101]">Volare</span>
+            <button class="text-[#010101]">
+                <iconify-icon icon="solar:hamburger-menu-linear" stroke-width="1.5" class="text-2xl"></iconify-icon>
+            </button>
+        </header>
+
+        <div class="p-6 md:p-10 max-w-7xl mx-auto w-full space-y-16 pb-24">
+            
+            <!-- SECTION 1: DASHBOARD METRICS -->
+            <section id="dashboard" class="space-y-8">
+                <div class="flex items-end justify-between">
+                    <div>
+                        <h1 class="text-2xl font-medium tracking-tight text-[#010101]">Today's Overview</h1>
+                        <p class="text-sm text-[#6b7280] mt-1">Real-time performance for Oct 24, 2023</p>
+                    </div>
+                    <button class="hidden sm:flex items-center gap-2 px-4 py-2 bg-white border border-[#e5e5e5] rounded-xl text-sm font-medium text-[#010101] hover:bg-[#f5f5f5] transition-colors shadow-sm">
+                        <iconify-icon icon="solar:calendar-linear" stroke-width="1.5"></iconify-icon>
+                        Today
+                        <iconify-icon icon="solar:alt-arrow-down-linear" stroke-width="1.5" class="text-[#6b7280]"></iconify-icon>
+                    </button>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    <!-- Revenue -->
+                    <div class="bg-[#ffffff] p-6 rounded-2xl border border-[#e5e5e5] shadow-sm flex flex-col gap-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-[#6b7280]">Total Revenue</span>
+                            <div class="w-8 h-8 rounded-lg bg-[#f5e3bd]/30 flex items-center justify-center text-[#c9a96e]">
+                                <iconify-icon icon="solar:wallet-money-linear" stroke-width="1.5"></iconify-icon>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-medium tracking-tight text-[#010101]">$1,240.50</div>
+                        </div>
+                    </div>
+
+                    <!-- Cost -->
+                    <div class="bg-[#ffffff] p-6 rounded-2xl border border-[#e5e5e5] shadow-sm flex flex-col gap-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-[#6b7280]">Total Cost (HPP)</span>
+                            <div class="w-8 h-8 rounded-lg bg-[#f5f5f5] flex items-center justify-center text-[#6b7280]">
+                                <iconify-icon icon="solar:tag-price-linear" stroke-width="1.5"></iconify-icon>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-medium tracking-tight text-[#010101]">$420.00</div>
+                        </div>
+                    </div>
+
+                    <!-- Profit -->
+                    <div class="bg-[#ffffff] p-6 rounded-2xl border border-[#e5e5e5] shadow-sm flex flex-col gap-4 relative overflow-hidden">
+                        <!-- Decorative accent -->
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-[#edcc94] opacity-5 rounded-bl-full pointer-events-none"></div>
+                        <div class="flex items-center justify-between relative z-10">
+                            <span class="text-sm font-medium text-[#6b7280]">Net Profit</span>
+                            <div class="w-8 h-8 rounded-lg bg-[#edcc94]/20 flex items-center justify-center text-[#c9a96e]">
+                                <iconify-icon icon="solar:graph-up-linear" stroke-width="1.5"></iconify-icon>
+                            </div>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="text-3xl font-medium tracking-tight text-[#c9a96e]">$820.50</div>
+                        </div>
+                    </div>
+
+                    <!-- Orders -->
+                    <div class="bg-[#ffffff] p-6 rounded-2xl border border-[#e5e5e5] shadow-sm flex flex-col gap-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-[#6b7280]">Total Orders</span>
+                            <div class="w-8 h-8 rounded-lg bg-[#f5f5f5] flex items-center justify-center text-[#6b7280]">
+                                <iconify-icon icon="solar:ticket-sale-linear" stroke-width="1.5"></iconify-icon>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-medium tracking-tight text-[#010101]">142</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Dashboard Modules -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Top Selling -->
+                    <div class="bg-[#ffffff] rounded-2xl border border-[#e5e5e5] shadow-sm overflow-hidden flex flex-col">
+                        <div class="px-6 py-5 border-b border-[#e5e5e5] flex justify-between items-center">
+                            <h3 class="text-base font-medium text-[#010101]">Top Selling Items</h3>
+                            <a href="#" class="text-xs font-medium text-[#c9a96e] hover:text-[#010101] transition-colors">View All</a>
+                        </div>
+                        <div class="p-6 flex flex-col gap-5">
+                            <!-- Item 1 -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?w=100&amp;h=100&amp;fit=crop" alt="Coffee" class="w-12 h-12 rounded-xl object-cover border border-[#e5e5e5]">
+                                    <div>
+                                        <h4 class="text-sm font-medium text-[#010101]">Iced Caramel Macchiato</h4>
+                                        <p class="text-xs text-[#6b7280] mt-0.5">$4.50</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-sm font-medium text-[#010101]">48</span>
+                                    <p class="text-xs text-[#6b7280] mt-0.5">sold</p>
+                                </div>
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=100&amp;h=100&amp;fit=crop" alt="Pastry" class="w-12 h-12 rounded-xl object-cover border border-[#e5e5e5]">
+                                    <div>
+                                        <h4 class="text-sm font-medium text-[#010101]">Almond Croissant</h4>
+                                        <p class="text-xs text-[#6b7280] mt-0.5">$3.80</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-sm font-medium text-[#010101]">32</span>
+                                    <p class="text-xs text-[#6b7280] mt-0.5">sold</p>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=100&amp;h=100&amp;fit=crop" alt="Coffee" class="w-12 h-12 rounded-xl object-cover border border-[#e5e5e5]">
+                                    <div>
+                                        <h4 class="text-sm font-medium text-[#010101]">Vanilla Latte (Hot)</h4>
+                                        <p class="text-xs text-[#6b7280] mt-0.5">$4.00</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-sm font-medium text-[#010101]">28</span>
+                                    <p class="text-xs text-[#6b7280] mt-0.5">sold</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Employee Performance -->
+                    <div class="bg-[#ffffff] rounded-2xl border border-[#e5e5e5] shadow-sm overflow-hidden flex flex-col">
+                        <div class="px-6 py-5 border-b border-[#e5e5e5]">
+                            <h3 class="text-base font-medium text-[#010101]">Staff Performance</h3>
+                        </div>
+                        <div class="p-6 flex flex-col gap-5">
+                            <!-- Staff 1 -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-[#f5e3bd] flex items-center justify-center text-[#c9a96e] font-medium text-sm">SJ</div>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-[#010101]">Sarah Jenkins</h4>
+                                        <p class="text-xs text-[#6b7280] mt-0.5">Cashier</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-right">
+                                        <span class="text-sm font-medium text-[#010101]">64</span>
+                                        <p class="text-xs text-[#6b7280] mt-0.5">trans.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Staff 2 -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-[#f5f5f5] flex items-center justify-center text-[#6b7280] font-medium text-sm">MR</div>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-[#010101]">Mike Ross</h4>
+                                        <p class="text-xs text-[#6b7280] mt-0.5">Cashier</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-right">
+                                        <span class="text-sm font-medium text-[#010101]">45</span>
+                                        <p class="text-xs text-[#6b7280] mt-0.5">trans.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Staff 3 -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-[#f5f5f5] flex items-center justify-center text-[#6b7280] font-medium text-sm">LT</div>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-[#010101]">Lisa Tang</h4>
+                                        <p class="text-xs text-[#6b7280] mt-0.5">Barista</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-right">
+                                        <span class="text-sm font-medium text-[#010101]">33</span>
+                                        <p class="text-xs text-[#6b7280] mt-0.5">trans.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-[#e5e5e5]">
+
+            <!-- SECTION 2: PRODUCT MANAGEMENT -->
+            <section id="products" class="space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl font-medium tracking-tight text-[#010101]">Product Menu</h2>
+                        <p class="text-sm text-[#6b7280] mt-1">Manage items, pricing, and costs.</p>
+                    </div>
+                    <!-- Primary Button -->
+                    <button class="flex items-center justify-center gap-2 px-4 py-2.5 bg-[#edcc94] hover:bg-[#c9a96e] text-[#010101] rounded-xl text-sm font-medium transition-colors shadow-sm w-full sm:w-auto">
+                        <iconify-icon icon="solar:add-circle-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                        Add Product
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                    
+                    <!-- Products Table -->
+                    <div class="lg:col-span-2 bg-[#ffffff] rounded-2xl border border-[#e5e5e5] shadow-sm overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-[#e5e5e5]">
+                                    <th class="px-6 py-4 text-xs font-medium text-[#6b7280] uppercase tracking-wider">Product</th>
+                                    <th class="px-6 py-4 text-xs font-medium text-[#6b7280] uppercase tracking-wider">Price</th>
+                                    <th class="px-6 py-4 text-xs font-medium text-[#6b7280] uppercase tracking-wider">Cost (HPP)</th>
+                                    <th class="px-6 py-4 text-xs font-medium text-[#6b7280] uppercase tracking-wider text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#e5e5e5]">
+                                <tr class="hover:bg-[#f5f5f5]/50 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center gap-3">
+                                            <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?w=100&amp;h=100&amp;fit=crop" class="w-10 h-10 rounded-lg object-cover border border-[#e5e5e5]" alt="">
+                                            <span class="text-sm font-medium text-[#010101]">Iced Caramel Macchiato</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#010101]">$4.50</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#6b7280]">$1.20</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                                        <button class="text-[#6b7280] hover:text-[#010101] p-1 rounded-md hover:bg-[#f5f5f5] transition-colors">
+                                            <iconify-icon icon="solar:menu-dots-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-[#f5f5f5]/50 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-lg bg-[#f5f5f5] flex items-center justify-center border border-[#e5e5e5] text-[#6b7280]">
+                                                <iconify-icon icon="solar:cup-hot-linear"></iconify-icon>
+                                            </div>
+                                            <span class="text-sm font-medium text-[#010101]">Espresso Double</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#010101]">$3.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#6b7280]">$0.80</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                                        <button class="text-[#6b7280] hover:text-[#010101] p-1 rounded-md hover:bg-[#f5f5f5] transition-colors">
+                                            <iconify-icon icon="solar:menu-dots-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-[#f5f5f5]/50 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center gap-3">
+                                            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=100&amp;h=100&amp;fit=crop" class="w-10 h-10 rounded-lg object-cover border border-[#e5e5e5]" alt="">
+                                            <span class="text-sm font-medium text-[#010101]">Almond Croissant</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#010101]">$3.80</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#6b7280]">$1.10</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                                        <button class="text-[#6b7280] hover:text-[#010101] p-1 rounded-md hover:bg-[#f5f5f5] transition-colors">
+                                            <iconify-icon icon="solar:menu-dots-linear" stroke-width="1.5" class="text-lg"></iconify-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Quick Add Form (Mocking Modal/Side Panel) -->
+                    <div class="bg-[#ffffff] rounded-2xl border border-[#e5e5e5] shadow-sm p-6 flex flex-col gap-5 relative">
+                        <div class="absolute -top-3 -right-3 w-6 h-6 bg-[#f5f5f5] border border-[#e5e5e5] rounded-full flex items-center justify-center lg:hidden">
+                            <iconify-icon icon="solar:close-circle-linear" class="text-xs text-[#6b7280]"></iconify-icon>
+                        </div>
+                        <h3 class="text-base font-medium text-[#010101]">Quick Add</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-medium text-[#010101] mb-1.5">Product Name</label>
+                                <input type="text" placeholder="e.g. Matcha Latte" class="w-full bg-[#f5f5f5]/50 border border-[#e5e5e5] rounded-xl px-3 py-2 text-sm text-[#010101] placeholder-[#6b7280] focus:outline-none focus:border-[#c9a96e] focus:bg-white transition-colors">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-medium text-[#010101] mb-1.5">Price</label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#6b7280]">$</span>
+                                        <input type="text" placeholder="0.00" class="w-full bg-[#f5f5f5]/50 border border-[#e5e5e5] rounded-xl pl-6 pr-3 py-2 text-sm text-[#010101] placeholder-[#6b7280] focus:outline-none focus:border-[#c9a96e] focus:bg-white transition-colors">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-[#010101] mb-1.5">Cost</label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#6b7280]">$</span>
+                                        <input type="text" placeholder="0.00" class="w-full bg-[#f5f5f5]/50 border border-[#e5e5e5] rounded-xl pl-6 pr-3 py-2 text-sm text-[#010101] placeholder-[#6b7280] focus:outline-none focus:border-[#c9a96e] focus:bg-white transition-colors">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Image upload mockup -->
+                            <div>
+                                <label class="block text-xs font-medium text-[#010101] mb-1.5">Image</label>
+                                <div class="border border-dashed border-[#e5e5e5] rounded-xl h-24 flex flex-col items-center justify-center text-[#6b7280] bg-[#f5f5f5]/30 hover:bg-[#f5f5f5] cursor-pointer transition-colors">
+                                    <iconify-icon icon="solar:gallery-add-linear" class="text-xl mb-1"></iconify-icon>
+                                    <span class="text-xs">Click to upload</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="w-full py-2.5 bg-[#f5f5f5] hover:bg-[#edcc94] text-[#010101] rounded-xl text-sm font-medium transition-colors border border-[#e5e5e5] hover:border-transparent mt-2">
+                            Save Product
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-[#e5e5e5]">
+
+            <!-- SECTION 3: ORDERS -->
+            <section id="orders" class="space-y-6">
+                <div>
+                    <h2 class="text-xl font-medium tracking-tight text-[#010101]">Recent Orders</h2>
+                    <p class="text-sm text-[#6b7280] mt-1">Live transaction feed.</p>
+                </div>
+
+                <div class="bg-[#ffffff] rounded-2xl border border-[#e5e5e5] shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-[#f5f5f5]/50 border-b border-[#e5e5e5]">
+                                    <th class="px-6 py-4 text-xs font-medium text-[#6b7280] uppercase tracking-wider">Order ID</th>
+                                    <th class="px-6 py-4 text-xs font-medium text-[#6b7280] uppercase tracking-wider">Time</th>
+                                    <th class="px-6 py-4 text-xs font-medium text-[#6b7280] uppercase tracking-wider">Cashier</th>
+                                    <th class="px-6 py-4 text-xs font-medium text-[#6b7280] uppercase tracking-wider text-right">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#e5e5e5]">
+                                <tr class="hover:bg-[#f5f5f5]/30 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#010101]">#ORD-0142</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#6b7280]">10:42 AM</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-5 h-5 rounded-full bg-[#f5e3bd] flex items-center justify-center text-[#c9a96e] text-[10px] font-medium">SJ</div>
+                                            <span class="text-sm text-[#010101]">Sarah J.</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#010101] text-right">$12.50</td>
+                                </tr>
+                                <tr class="hover:bg-[#f5f5f5]/30 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#010101]">#ORD-0141</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#6b7280]">10:38 AM</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-5 h-5 rounded-full bg-[#f5e3bd] flex items-center justify-center text-[#c9a96e] text-[10px] font-medium">SJ</div>
+                                            <span class="text-sm text-[#010101]">Sarah J.</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#010101] text-right">$8.00</td>
+                                </tr>
+                                <tr class="hover:bg-[#f5f5f5]/30 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#010101]">#ORD-0140</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#6b7280]">10:25 AM</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-5 h-5 rounded-full bg-[#e5e5e5] flex items-center justify-center text-[#6b7280] text-[10px] font-medium">MR</div>
+                                            <span class="text-sm text-[#010101]">Mike R.</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#010101] text-right">$24.30</td>
+                                </tr>
+                                <tr class="hover:bg-[#f5f5f5]/30 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#010101]">#ORD-0139</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#6b7280]">10:15 AM</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-5 h-5 rounded-full bg-[#f5e3bd] flex items-center justify-center text-[#c9a96e] text-[10px] font-medium">SJ</div>
+                                            <span class="text-sm text-[#010101]">Sarah J.</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#010101] text-right">$4.50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="p-4 border-t border-[#e5e5e5] flex items-center justify-center bg-[#f5f5f5]/30">
+                        <button class="text-sm font-medium text-[#6b7280] hover:text-[#010101] transition-colors">View all orders</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+
+</body></html>

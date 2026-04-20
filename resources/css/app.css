@@ -1,11 +1,93 @@
 @import 'tailwindcss';
 
+@plugin 'daisyui' {
+  themes: volare --default;
+}
+
+@plugin 'daisyui/theme' {
+  name: "volare";
+  default: true;
+  color-scheme: light;
+  --color-primary: oklch(84% 0.103 75.4);
+  --color-primary-content: oklch(6% 0 0);
+  --color-secondary: oklch(71% 0.09 70);
+  --color-secondary-content: oklch(6% 0 0);
+  --color-accent: oklch(91% 0.07 80);
+  --color-accent-content: oklch(6% 0 0);
+  --color-neutral: oklch(6% 0 0);
+  --color-neutral-content: oklch(100% 0 0);
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(96% 0 0);
+  --color-base-300: oklch(91% 0 0);
+  --color-base-content: oklch(6% 0 0);
+  --color-info: oklch(74% 0.1 232);
+  --color-info-content: oklch(100% 0 0);
+  --color-success: oklch(76% 0.149 163);
+  --color-success-content: oklch(100% 0 0);
+  --color-warning: oklch(84% 0.103 75.4);
+  --color-warning-content: oklch(6% 0 0);
+  --color-error: oklch(65% 0.236 18);
+  --color-error-content: oklch(100% 0 0);
+  --radius-selector: 0.75rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+}
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Button border — reduce DaisyUI v5 default 2px to 1px ── */
+.btn {
+    border-width: 1px;
+}
+
+/* ── Input / Textarea / Select border fix for DaisyUI v5 custom theme ── */
+.input,
+.input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+    border: 1px solid oklch(91% 0 0);
+    background-color: oklch(100% 0 0);
+}
+
+.input:focus,
+.input:focus-within {
+    border-color: oklch(84% 0.103 75.4);
+    outline: 2px solid oklch(84% 0.103 75.4 / 30%);
+    outline-offset: 0;
+}
+
+.input.input-error {
+    border-color: oklch(65% 0.236 18);
+}
+
+.textarea {
+    border: 1px solid oklch(91% 0 0);
+    background-color: oklch(100% 0 0);
+}
+
+.textarea:focus {
+    border-color: oklch(84% 0.103 75.4);
+    outline: 2px solid oklch(84% 0.103 75.4 / 30%);
+    outline-offset: 0;
+}
+
+.select {
+    border: 1px solid oklch(91% 0 0);
+    background-color: oklch(100% 0 0);
+}
+
+.select:focus {
+    border-color: oklch(84% 0.103 75.4);
+    outline: 2px solid oklch(84% 0.103 75.4 / 30%);
+    outline-offset: 0;
+}
+
+.file-input {
+    border: 1px solid oklch(91% 0 0);
+    background-color: oklch(100% 0 0);
 }
